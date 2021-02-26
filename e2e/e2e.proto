@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+option go_package = ".;e2e";
+
+enum RootEnum {
+    ABC = 0;
+    DEF = 1;
+    GAH = 2;
+}
+
+message Nested {
+    enum Enum {
+        ABC = 0;
+        DEF = 1;
+        GAH = 2;
+    }
+}
+
+message Deeply {
+    message Nested {
+        enum Enum {
+            ABC = 0;
+            DEF = 1;
+            GAH = 2;
+        }
+    }
+}
+
+enum ScreamingSnakeWithPrefix {
+    SCREAMING_SNAKE_WITH_PREFIX_ABC = 0;
+    SCREAMING_SNAKE_WITH_PREFIX_DEF = 1;
+    SCREAMING_SNAKE_WITH_PREFIX_GAH = 2;
+}
+
+message MessageWithRootEnum {
+    RootEnum field = 1;
+}
+
+message MessageWithNestedEnum {
+    Nested.Enum field = 1;
+}
+
+message MessageWithDeeplyNestedEnum {
+    Deeply.Nested.Enum field = 1;
+}
+
+message ScreamingSnakeWithPrefxEnum {
+    ScreamingSnakeWithPrefix field = 1;
+}
+
+message MessageWithAttribute {
+    // @inject_tag: xml:"field,attr"
+    RootEnum field = 1;
+}
